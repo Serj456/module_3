@@ -1,27 +1,19 @@
-def send_email(message, recipient, *,sender = "university.help@gmail.com"):
+def send_email(message, recipient, *,sender = "UNIVERSity.help@gmail.com"):
     sobaka = '@'
-    end_adress = ['.COM', '.ru', '.net']
-    if any(word_recip.casefold() in recipient.casefold() for word_recip in end_adress):
-        pass
-    else:
+    end_adress = ['.com', '.ru', '.net']
+    message = message.casefold()
+    recipient = recipient.casefold()
+    sender = sender.casefold()
+
+    if all(word_recip not in recipient for word_recip in end_adress):
         print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
-        return
-    if any(word_send.casefold() in sender.casefold() for word_send in end_adress):
-        pass
-    else:
+    elif all(word_send not in sender for word_send in end_adress):
         print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
-        return
-    if sobaka in recipient and sobaka in sender:
-        pass
-    else:
+    elif sobaka not in recipient or sobaka not in sender:
         print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}")
-        return
-    if sender.casefold() == recipient.casefold():
+    elif sender == recipient:
         print("Нельзя отправить письмо самому себе!")
-        return
-    else:
-        pass
-    if sender.casefold() == "university.help@gmail.com":
+    elif sender.casefold() == "university.help@gmail.com":
         print(f"Письмо успешно отправлено с адреса {sender} на адрес {recipient}.")
     else:
         print(f"НЕСТАНДАРТНЫЙ ОТПРАВИТЕЛЬ! Письмо отправлено с адреса {sender} на адрес {recipient}.")
