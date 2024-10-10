@@ -1,0 +1,20 @@
+print('Первый раздел: ')
+def print_params(a = 1, b = 'строка', c = True):
+    print(a, b, c)
+print_params()
+print_params(121)
+print_params(123, 223)
+print_params(124, 224, 324)
+print_params('False', False, 444)
+print_params(b = 25)
+print_params(c = [1,2,3])
+print('___________________________________________________')
+print('Второй раздел: ')
+values_list = ['string', False, 99]
+values_dict = {'a' : 'string_dict', 'b' : True, 'c' : 165}
+print_params(*values_list)
+print_params(**values_dict)
+print('___________________________________________________')
+print('Третий раздел: ')
+values_list_2 = ['what', 123]
+print_params(*values_list_2,42)
