@@ -1,4 +1,3 @@
-
 data_structure = [
 [1, 2, 3],
 {'a': 4, 'b': 5},
@@ -6,60 +5,24 @@ data_structure = [
 "Hello",
 ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
-
 def calc(args):
-    list_temp = []
-    
-    for x in args:
-        if isinstance(x,list):
-            list_temp.extend(x)
-        elif isinstance(x,str):
-            x = len(x)
-            list_temp.append(x)
-        elif isinstance(x, dict):
-            x = dict(**x)
-            y = x.values()
-            list_temp.extend(x)
-            list_temp.extend(y)
-        elif isinstance(x,tuple):
-            for j in x:
-                if isinstance(j, int):
-                    list_temp.append(j)
-                elif isinstance(j, dict):
-                    j = dict(**j)
-                    k = j.values()
-                    list_temp.extend(j)
-                    list_temp.extend(k)
-                if isinstance(j, list):
-                    for g in j:
-                        if isinstance(g,set):
-                            for m in g:
-                                if isinstance(m,int):
-                                    list_temp.extend(m)
-                                elif isinstance(m,str):
-                                    m = len(m)
-                                    list_temp.extend(m)
-                                elif isinstance(m,tuple):
-                                    for n in m:
-                                        if isinstance(n,int):
-                                            list_temp.append(n)
-                                        elif isinstance(n,str):
-                                            n = len(n)
-                                            list_temp.append(n)
-                                        elif isinstance(n, tuple):
-                                            for a_ in n:
-                                                if isinstance(a_, int):
-                                                    list_temp.append(a_)
-                                                elif isinstance(a_, str):
-                                                    a_ = len(a_)
-                                                    list_temp.append(a_)
+    result = 0
+    for item in args:
+        if isinstance(item, list):
+            result += calc(item)
+        elif isinstance(item, str):
+            result += len(item)
+        elif isinstance(item,int):
+            result += item
+        elif isinstance(item, dict):
+            keys_ = list(item.keys())
+            values_ = sum(item.values())
+            result += calc(keys_)
+            result += values_
+        elif isinstance(item, tuple):
+            result += calc(item)
+        elif isinstance(item, set):
+            result += calc(item)
 
-
-        else:
-            pass
-    list_temp = [len(x) if isinstance(x, str) else x for x in list_temp]
-    sum_ = sum(list_temp)
-    print(list_temp)
-    return sum_
-
+    return result
 print(calc(data_structure))
